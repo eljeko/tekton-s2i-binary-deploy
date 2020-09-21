@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: get-pods-namespace-task
+spec:
+  params:
+    - name: namespace
+      type: string
+  steps:
+    - name: get-pods
+      image: quay.io/openshift/origin-cli:latest
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          oc get pods -n $(params.namespace) --token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjlvUFZfSGV2S20yMjdXVmhKTHJBa09udE50WXN5a0pOcFJuM2c5RFNuVEUifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhY21lLWFwcCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJ0ZWt0b25ib3QtdG9rZW4tdmZrbXEiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoidGVrdG9uYm90Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiODkyMWM5OGItZjAxOS00NzFmLWE1NGEtMjhhNWYzMTBmNWJjIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmFjbWUtYXBwOnRla3RvbmJvdCJ9.LKZwjh6jfoV7r9hpEyt9zNkMstZPWS_SHgMvrCidMrMk-7zmnGlaIGEgNBiR91e9-wuDv8WfVAH10Yv-LgKKeWJN9DfB3fVH6UHwoUnhUSVV2Bn-A4hB4O04_o5TwKGg9mrvig_VbZSOIc0Zt1IBzpyoiJjGUZWDYNEE-iODurWCDEMnmgLsefc8B3DRpchxhim0_dXm2_ikk1xoZtcuvpEmbiXtYXSElXFQtgRdTggIOagkgmzJEJssJ1CiCow0v-VICSb_DJdtChzeax0eFS6-TeF-p8KsKiHp4bq6hPFvvbAvpjSxLdy5IjAh9Kdaerdh3XcS6iwPKGviX4JvMA

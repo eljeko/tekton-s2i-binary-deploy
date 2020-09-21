@@ -45,13 +45,52 @@ Now from the route created by OpenShift you can reach the application deployed (
 
 # Tekton Pipeline
 
+Clean if you need
+
+```
+oc delete pipeline acme-app-build-and-deploy
+oc delete task maven-build
+oc delete task eap-binary-deploy-task
+```
+
 ## The cli
 
 ## Create the tasks
 
 We need a maven task for tekton in order to build the warfile
 
+Add maven build task
+```
+oc apply -f manven-build-task.yaml
+```
+
+Create binary deploy task:
+```
+oc apply -f eap-binary-deploy-task.yaml
+``` 
 
 ## Create the pipeline
+
+```
+oc apply -f pipeline.yaml
+````
+
+## OCP: Create a service account
+
+In the target project:
+
+oc project acme-app
+
+Create a new service account called jenkins
+
+```oc create serviceaccount tektonbot```
+
+The service account will need to have project level access to each of the projects it will manage The edit role provides a sufficient level of access needed by Jenkins.
+
+```oc policy add-role-to-user edit system:serviceaccount:acme-app:tektonbot -n acme-app```
+
+```oc serviceaccounts get-token tektonbot -n acme-app```
+
+Get yor token to use as a parameter to start the pipeline
 
 ## Run the pipeline
