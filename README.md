@@ -1,10 +1,10 @@
-# Prepare the app manually for the first run
+# Tekton s2i binary deploy example
 
 ## Prerequisite
 
 * [oc client](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html)
 
-# Install the examples
+## Install the examples
 
 Login on your OCP cluster then just run the ```setup.sh``` and provide a prefix.
 
@@ -21,7 +21,7 @@ The script should output all the steps
 * Creates pvc for the build
 * Creates the Pipeline
 
-# Remove the examples
+## Remove the examples
 
 Login on your OCP cluster then just run the ```clean.sh``` and provide a prefix (the same provided to install.sh).
 
