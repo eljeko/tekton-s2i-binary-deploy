@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: eap-binary-deploy-template
+objects:
+- kind: Task
+  apiVersion: tekton.dev/v1beta1
+  metadata:
+    name: eap-binary-deploy
+  spec:
+    params:
+      - name: namespace
+        type: string
+    workspaces:
+    - name: source
+      description: The workspace where the source code will found
+    steps:
+      - name: get-pods
+        image: quay.io/openshift/origin-cli:latest
+        command: ["/bin/bash", "-c"]
+        args:
+          - |-
+            oc start-build acmeapp --from-file=/workspace/source/acme-app/target/ROOT.war -n $(params.namespace) --token=${TOKEN}
+parameters:
+- description: Prefix for the projects
+  from: '[A-Z0-9]{8}'
+  generate: expression
+  name: TOKEN

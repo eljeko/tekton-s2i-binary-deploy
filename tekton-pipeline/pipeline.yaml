@@ -3,9 +3,6 @@ kind: Pipeline
 metadata:
   name: acme-app-build-and-deploy
 spec:
-  resources:
-  - name: git-repo
-    type: git 
   workspaces:
     - name: workspace-acme   
   params:

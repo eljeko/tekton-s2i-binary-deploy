@@ -1,0 +1,18 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: acme-app-build-and-deploy-run
+spec:
+  params:
+    - name: target-namespace
+      value: acme-app
+  pipelineRef:
+    name: acme-app-build-and-deploy
+  resources:
+    - name: git-repo
+      resourceRef:
+        name: git-bwjo6j
+  workspaces:
+    - name: workspace-acme
+      persistentVolumeClaim:
+        claimName: acme-build-pvc
